@@ -26,7 +26,9 @@ class Parser {
                 this.currentToken.value === "print"
             )
                 ast.body.push(this.printStatement());
-            else ast.body.push(this.expressionStatement());
+            else {
+                ast.body.push(this.expressionStatement());
+            }
         }
 
         return ast;
@@ -62,7 +64,7 @@ class Parser {
     }
 
     expression() {
-        const left = this.term();
+        let left = this.term();
 
         while (
             this.currentToken.type === Token.Punctuator &&
@@ -71,7 +73,7 @@ class Parser {
             const operator = this.currentToken.value;
             this.nextToken();
             const right = this.term();
-            return {
+            left = {
                 type: "BinaryExpression",
                 operator,
                 left,
@@ -83,7 +85,7 @@ class Parser {
     }
 
     term() {
-        const left = this.factor();
+        let left = this.factor();
 
         while (
             this.currentToken.type === Token.Punctuator &&
@@ -92,7 +94,7 @@ class Parser {
             const operator = this.currentToken.value;
             this.nextToken();
             const right = this.factor();
-            return {
+            left = {
                 type: "BinaryExpression",
                 operator,
                 left,

@@ -17,7 +17,7 @@ class Scanner {
     lineStart = 0;
 
     constructor(source) {
-        this.source = source;
+        this.source = source.trim();
     }
 
     eof() {
@@ -154,8 +154,8 @@ class Scanner {
         let char = this.source[this.index];
 
         while (
-            Character.isWhiteSpace(char.charCodeAt(0)) ||
-            Character.isLineTerminator(char.charCodeAt(0))
+            Character.isWhiteSpace(char?.charCodeAt(0)) ||
+            Character.isLineTerminator(char?.charCodeAt(0))
         ) {
             if (this.eof()) {
                 return {
@@ -166,15 +166,15 @@ class Scanner {
                     start: this.index,
                     end: this.index,
                 };
-            } else if (Character.isLineTerminator(char.charCodeAt(0)))
+            } else if (Character.isLineTerminator(char?.charCodeAt(0)))
                 this.skipLineTerminator();
             else ++this.index;
             char = this.source[this.index];
         }
 
-        if (Character.isIdentifierStart(char.charCodeAt(0)))
+        if (Character.isIdentifierStart(char?.charCodeAt(0)))
             return this.scanKeywordOrIdentifier();
-        else if (Character.isDecimalDigit(char.charCodeAt(0)))
+        else if (Character.isDecimalDigit(char?.charCodeAt(0)))
             return this.scanNumber();
         else if (this.isPunctuator(char)) return this.scanPunctuator();
         else {

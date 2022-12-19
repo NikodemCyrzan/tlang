@@ -31,7 +31,7 @@ class Interpreter {
 
         for (const node of ast.body) {
             if (node.type === "VariableDeclaration") {
-                const value = this.evaluate(node.init);
+                const value = node.init != null ? this.evaluate(node?.init) : 0;
                 this.variables.set(node.id.name, value);
                 console.log(value);
             } else if (node.type === "PrintStatement") {
@@ -70,6 +70,8 @@ class Interpreter {
                 const value = this.evaluate(node.right);
                 this.variables.set(node.left.name, value);
                 return Number(value);
+            case "UnaryExpression":
+                return -this.evaluate(node.argument);
         }
     }
 }
