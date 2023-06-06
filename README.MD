@@ -107,7 +107,7 @@ IDENTIFIER PUNCTUATOR(=) BINARY_EXPRESSION
 
 ## 3. Variable declaration
 
-Variable declarations are initated with `var` Keyword and they create new variable in memory, which can be accesed by supplied Identifier. It is also possible to assign initial value to the variable, witch is [Binary Expression](#21-binary-expression).
+Variable declarations are initated with `var` Keyword and they create new variable in memory, which can be accesed by supplied Identifier. It is also possible to assign initial value to the variable, which is [Binary Expression](#21-binary-expression).
 
 #### Syntax:
 
